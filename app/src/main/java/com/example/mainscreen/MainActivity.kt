@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -43,9 +44,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier, mainViewModel: MainViewModel = viewModel()) {
-    var name by remember { mutableStateOf("") }
-    var age = remember { mutableStateOf("") }
-
     Column(
         modifier = modifier.fillMaxSize()
     ) {
@@ -66,7 +64,7 @@ fun MainScreen(modifier: Modifier = Modifier, mainViewModel: MainViewModel = vie
     }
 
     Text(
-        text = "Hello",
+        text = "Hello Activity Life Cycle",
         modifier = modifier
     )
 }
