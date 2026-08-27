@@ -5,19 +5,20 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class MainViewModel : ViewModel() {
-    var name by mutableStateOf("")
-        private set
-
-    var age by mutableIntStateOf(0)
-        private set
+    private val _uiState = MutableStateFlow(User())
+    var uiState: StateFlow<User> = _uiState.asStateFlow()
 
     fun updateName(name: String) {
-        this.name = name
+        _uiState.update { it.copy(name = name) }
     }
 
     fun udapteAge(age: Int) {
-        this.age = age
+        _uiState.update { it.copy(age = age) }
     }
 }

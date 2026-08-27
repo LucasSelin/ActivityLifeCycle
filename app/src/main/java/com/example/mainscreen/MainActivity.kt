@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,18 +45,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier, mainViewModel: MainViewModel = viewModel()) {
+    val uiState by mainViewModel.uiState.collectAsState()
+
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         TextField(
-            value = mainViewModel.name,
+            value = uiState.name,
             label = { Text("Name") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             modifier = Modifier.fillMaxWidth(),
             onValueChange = { mainViewModel.updateName(it)}
         )
         TextField(
-            value = mainViewModel.age.toString(),
+            value = uiState.age.toString(),
             label = { Text("Age")},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
